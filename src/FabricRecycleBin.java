@@ -58,6 +58,10 @@ public class FabricRecycleBin implements IBag<Garbage> {
         return null;
     }
 
+    public int getItemCount(){
+        return this.index;
+    }
+
     @Override
     public int getIndexOf(Garbage item) {
         for (int i = 0; i < this.index; i++) {

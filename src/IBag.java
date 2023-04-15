@@ -5,6 +5,7 @@ public interface IBag<T> {
     public T removeByIndex(int index);
     public T remove();
     public T remove(T item);
+    public int getItemCount();
     public int getIndexOf(T item);
     public boolean contains(T item);
     public void displayItems();
