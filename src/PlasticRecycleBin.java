@@ -85,10 +85,10 @@ public class PlasticRecycleBin implements IBag<Garbage> {
 
     @Override
     public void displayItems() {
-        if (this.index > 0) {
-            System.out.printf("The Plastic Recycling: %d | ", this.size);
+        if (getItemCount() > 0) {
+            System.out.printf("Plastic Recycling Bin: %d | ", this.size);
             int amount = 1;
-            for (int i = 0; i < this.index - 1; i++) {
+            for (int i = 0; i < getItemCount() - 1; i++) {
                 if (plasticRecycleBin[i].toString() == plasticRecycleBin[i + 1].toString()) {
                     amount++;
                 } else {
@@ -96,13 +96,18 @@ public class PlasticRecycleBin implements IBag<Garbage> {
                     amount = 1;
                 }
             }
-            System.out.printf("%d %s \n", amount, plasticRecycleBin[this.index - 1].toString());
+            System.out.printf("%d %s \n", amount, plasticRecycleBin[getItemCount() - 1].toString());
+        }
+        else {
+            System.out.println("Plastic Recycle Bin: 0");
         }
     }
 
     @Override
     public void dump() {
-
+        for (int i = 0; i < this.index; i++) {
+            plasticRecycleBin[i] = null;
+        }
     }
 
     @Override

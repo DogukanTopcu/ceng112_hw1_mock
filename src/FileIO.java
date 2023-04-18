@@ -5,11 +5,15 @@ public class FileIO {
 
     File garbageFile;
 
+    // Constructor. Takes the file path as a parameter.
     public FileIO(String pathName) {
         garbageFile = new File(pathName);
     }
 
+
     TrashCan trashCan = new TrashCan();
+
+    // Read File Function. Returns "trashCan" object.
     public IBag<Garbage> readTrashCan() {
         try {
             Scanner garbage = new Scanner(garbageFile);
@@ -17,7 +21,6 @@ public class FileIO {
                 String line = garbage.nextLine();
                 String[] splitLine = line.split(",");
 
-                // Integer.parseInt(splitLine[2].split(" ")[0])
                 for (int i = 0; i < Integer.parseInt(splitLine[2].split(" ")[0]); i++) {
                     Garbage newGarbage = new Garbage(splitLine[0], splitLine[1]);
                     if (!trashCan.isFull()) {
@@ -36,6 +39,7 @@ public class FileIO {
         return trashCan;
     }
 
+    // Update the garbage.txt file.
     public boolean updateTrashCan() {
         try {
             FileWriter garbage = new FileWriter(garbageFile);

@@ -84,10 +84,10 @@ public class OrganicRecycleBin implements IBag<Garbage> {
 
     @Override
     public void displayItems() {
-        if (this.index > 0) {
+        if (getItemCount() > 0) {
             System.out.printf("Organic Recycling Bin: %d | ", this.size);
             int amount = 1;
-            for (int i = 0; i < this.index - 1; i++) {
+            for (int i = 0; i < getItemCount() - 1; i++) {
                 if (organicRecycleBin[i].toString() == organicRecycleBin[i + 1].toString()) {
                     amount++;
                 } else {
@@ -95,13 +95,18 @@ public class OrganicRecycleBin implements IBag<Garbage> {
                     amount = 1;
                 }
             }
-            System.out.printf("%d %s \n", amount, organicRecycleBin[this.index - 1].toString());
+            System.out.printf("%d %s \n", amount, organicRecycleBin[getItemCount() - 1].toString());
+        }
+        else {
+            System.out.println("Organic Recycle Bin: 0");
         }
     }
 
     @Override
     public void dump() {
-
+        for (int i = 0; i < this.index; i++) {
+            organicRecycleBin[i] = null;
+        }
     }
 
     @Override

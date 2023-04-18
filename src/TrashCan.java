@@ -5,17 +5,17 @@ public class TrashCan implements IBag<Garbage> {
     public Garbage[] trashCan = new Garbage[450];
     public int index = 0;
 
+
+    // Recycle Bins
     Random rand = new Random();
     int[] sizes = {5, 10, 15};
-
-
     // sizes[rand.nextInt(3)] : Select the one of the three option.
-    PlasticRecycleBin plasticRecycleBin = new PlasticRecycleBin(sizes[rand.nextInt(3)]);
-    PaperRecycleBin paperRecycleBin = new PaperRecycleBin(sizes[rand.nextInt(3)]);
-    GlassRecycleBin glassRecycleBin = new GlassRecycleBin(sizes[rand.nextInt(3)]);
-    FabricRecycleBin fabricRecycleBin = new FabricRecycleBin(sizes[rand.nextInt(3)]);
-    MetalRecycleBin metalRecycleBin = new MetalRecycleBin(sizes[rand.nextInt(3)]);
-    OrganicRecycleBin organicRecycleBin = new OrganicRecycleBin(sizes[rand.nextInt(3)]);
+    public PlasticRecycleBin plasticRecycleBin = new PlasticRecycleBin(sizes[rand.nextInt(3)]);
+    public PaperRecycleBin paperRecycleBin = new PaperRecycleBin(sizes[rand.nextInt(3)]);
+    public GlassRecycleBin glassRecycleBin = new GlassRecycleBin(sizes[rand.nextInt(3)]);
+    public FabricRecycleBin fabricRecycleBin = new FabricRecycleBin(sizes[rand.nextInt(3)]);
+    public MetalRecycleBin metalRecycleBin = new MetalRecycleBin(sizes[rand.nextInt(3)]);
+    public OrganicRecycleBin organicRecycleBin = new OrganicRecycleBin(sizes[rand.nextInt(3)]);
 
 
     public boolean separate(Garbage item){
@@ -140,10 +140,10 @@ public class TrashCan implements IBag<Garbage> {
 
     @Override
     public void displayItems() {
-        if (this.index > 0) {
+        if (getItemCount() > 0) {
             System.out.printf("The Trash Can: %d | ", this.index);
             int amount = 1;
-            for (int i = 0; i < this.index - 1; i++) {
+            for (int i = 0; i < getItemCount() - 1; i++) {
                 if (trashCan[i].toString() == trashCan[i+1].toString()){
                     amount++;
                 }
@@ -152,30 +152,18 @@ public class TrashCan implements IBag<Garbage> {
                     amount = 1;
                 }
             }
-            System.out.printf("%d %s \n", amount, trashCan[this.index - 1].toString());
+            System.out.printf("%d %s \n", amount, trashCan[getItemCount() - 1].toString());
+        }
+        else {
+            System.out.println("The Trash Can: 0");
         }
     }
 
     @Override
     public void dump() {
-        int i = 0;
-        while (i < index) {
-            if (separate(trashCan[i])){
-                i = 0;
-            }
-            else {
-                i++;
-            }
+        for (int i = 0; i < this.index; i++) {
+            trashCan[i] = null;
         }
-
-        plasticRecycleBin.displayItems();
-        organicRecycleBin.displayItems();
-        fabricRecycleBin.displayItems();
-        paperRecycleBin.displayItems();
-        metalRecycleBin.displayItems();
-        glassRecycleBin.displayItems();
-
-        displayItems();
     }
 
     @Override
